@@ -1,19 +1,62 @@
-import getch
 import os
 
-def clears():os.system('cls' if os.name=='nt' else 'clear')
 
-def printitle(str, n):
+class _Getch:
+    """Similar ao getch do C++. Verifica o sistema e executa o comando certo"""
+    def __init__(self):
+        try:
+            self.impl = _GetchWindows()  # atribui getch para windows
+        except ImportError:
+            self.impl = _GetchUnix()  # atribui o getch para UNIX
+
+    def __call__(self): return self.impl()  # chama o getch correspondente
+
+
+class _GetchUnix:
+    """Classe chamada quando num sistema UNIX"""
+
+    def __call__(self):
+        import getch  # importa o getch
+        return getch.getch()  # retorna o metodo getch
+
+
+class _GetchWindows:
+    """Classe chamada num sistema windows"""
+
+    def __call__(self):
+        import msvcrt  # importa o similar ao getch para windows
+        return msvcrt.getch()  # retorna o getch
+
+
+getchar = _Getch()  # daqui pra frente, quando chamar 'getchar' o programa faz o processo explicado acima
+
+
+def clears(): os.system('cls' if os.name == 'nt' else 'clear')  # limpa a tela conforme o sistema
+
+
+def printitle(string, n):
+    """
+    :param string: o que sera mostrado
+    :param n: quantos espaços de delimitação
+    :return: sem retorno; mostra na tela a string contornada
+    """
     print('-'*n)
-    print(str.center(n))
+    print(string.center(n))
     print('-'*n)
 
-def prinsubtitle(str):
-    print('-'*len(str))
-    print(str)
-    print('-'*len(str))
+
+def prinsubtitle(string):
+    """
+    :param string: o que sera mostrado
+    :return: sem retorno; mostra na tela a string contornada conforme seu tamanho
+    """
+    print('-'*len(string))
+    print(string)
+    print('-'*len(string))
+
 
 clears()
+
 
 print('-'*126)
 print("""  _____     _______ _    _         ____  ______     _    _ _____ _____ _    _        _____  _____ _    _  ____   ____  _
@@ -30,5 +73,5 @@ print("- A cada escolha que você terá que fazer ser-lhe-ão mostradas as opç�
 print("- O menu funciona da mesma forma: digite a letra correspondente a sua escolha")
 print("\nPressione qualquer tecla para continuar...")
 
-getch.getch()
+getchar()
 print("Yay")
