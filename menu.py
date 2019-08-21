@@ -1,13 +1,18 @@
+# -*- coding: utf-8 -*-
 import os
 
+print('\033[;1m' + '\033[1;102m' + '\033[1;90m')
+print()
 
 class _Getch:
     """Similar ao getch do C++. Verifica o sistema e executa o comando certo"""
     def __init__(self):
-        try:
+        if os.name == 'nt':
             self.impl = _GetchWindows()  # atribui getch para windows
-        except ImportError:
+        elif os.name == 'posix':
             self.impl = _GetchUnix()  # atribui o getch para UNIX
+        else:
+            print('ERRO! Sistema não suportado')
 
     def __call__(self): return self.impl()  # chama o getch correspondente
 
@@ -67,11 +72,15 @@ print("""  _____     _______ _    _         ____  ______     _    _ _____ _____ 
  |_| /_/    \_\_|  |_|  |_|       \____/|_|        |_|  |_|_____\_____|_|  |_|     |_____/ \_____|_|  |_|\____/ \____/|______|""")
 print('-'*126)
 
-printitle("Instruções", 126)
+
+print('\n\n')
+printitle("INSTRUÇÕES BÁSICAS", 126)
 print("- O jogo é baseado em suas escolhas: preste atenção")
 print("- A cada escolha que você terá que fazer ser-lhe-ão mostradas as opções. Você deve digitar a letra correspondente a sua escolha")
 print("- O menu funciona da mesma forma: digite a letra correspondente a sua escolha")
 print("\nPressione qualquer tecla para continuar...")
 
 getchar()
-print("Yay")
+clears()
+
+printitle('MENU', 126)
