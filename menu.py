@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 import os
 
-print('\033[;1m' + '\033[1;102m' + '\033[1;90m')
+print('\033[;1m' + '\033[1;42m' + '\033[1;97m')
 print()
+
 
 class _Getch:
     """Similar ao getch do C++. Verifica o sistema e executa o comando certo"""
@@ -60,8 +61,29 @@ def prinsubtitle(string):
     print('-'*len(string))
 
 
-clears()
+def menu():
+    clears()
+    while True:
+        printitle('MENU', 126)
+        print('\tA - JOGAR')
+        print('\tB - INSTRUÇÕES')
+        print('\tC - CRÉDITOS')
+        o = getchar()
+        if o.lower() == b'a':
+            print('Jogar aqui')
+            break
+        elif o.lower() == b'b':
+            print('Instruções aqui')
+            break
+        elif o.lower() == b'c':
+            print('Créditos aqui')
+            break
+        else:
+            clears()
+            print('Opção Inválida! Digite novamente:\n')
 
+
+clears()
 
 print('-'*126)
 print("""  _____     _______ _    _         ____  ______     _    _ _____ _____ _    _        _____  _____ _    _  ____   ____  _
@@ -74,13 +96,6 @@ print('-'*126)
 
 
 print('\n\n')
-printitle("INSTRUÇÕES BÁSICAS", 126)
-print("- O jogo é baseado em suas escolhas: preste atenção")
-print("- A cada escolha que você terá que fazer ser-lhe-ão mostradas as opções. Você deve digitar a letra correspondente a sua escolha")
-print("- O menu funciona da mesma forma: digite a letra correspondente a sua escolha")
-print("\nPressione qualquer tecla para continuar...")
-
+print("Pressione qualquer tecla para continuar...")
 getchar()
-clears()
-
-printitle('MENU', 126)
+menu()
