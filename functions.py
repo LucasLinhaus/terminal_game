@@ -2,20 +2,21 @@
 import os
 import sys
 
-class _Getch:
+
+class Getch:
     """Similar ao getch do C++. Verifica o sistema e executa o comando certo"""
     def __init__(self):
         if os.name == 'nt':
-            self.impl = _GetchWindows()  # atribui getch para windows
+            self.impl = GetchWindows()  # atribui getch para windows
         elif os.name == 'posix':
-            self.impl = _GetchUnix()  # atribui o getch para UNIX
+            self.impl = GetchUnix()  # atribui o getch para UNIX
         else:
             print('ERRO! Sistema não suportado')
 
     def __call__(self): return self.impl()  # chama o getch correspondente
 
 
-class _GetchUnix:
+class GetchUnix:
     """Classe chamada quando num sistema UNIX"""
 
     def __call__(self):
@@ -23,14 +24,15 @@ class _GetchUnix:
         return getch.getch()  # retorna o metodo getch
 
 
-class _GetchWindows:
+class GetchWindows:
     """Classe chamada num sistema windows"""
 
     def __call__(self):
         import msvcrt  # importa o similar ao getch para windows
         return msvcrt.getch()  # retorna o getch
 
-getchar = _Getch()
+
+getchar = Getch()
 
 
 def clears(): os.system('cls' if os.name == 'nt' else 'clear')  # limpa a tela conforme o sistema
@@ -58,6 +60,9 @@ def prinsubtitle(string):
 
 
 def menu():
+    """
+    :return: sem retorno; mostra o menu na tela
+    """
     clears()
     while True:
         printitle('MENU', 126)
@@ -78,7 +83,11 @@ def menu():
             clears()
             print('Opção Inválida! Digite novamente:\n')
 
+
 def finish():
+    """
+    :return: sem retorno; acaba o programa
+    """
     printitle('Até mais!', 126)
     getchar()
     print('\033[0;0m')

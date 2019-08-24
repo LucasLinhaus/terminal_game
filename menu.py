@@ -4,7 +4,7 @@ import functions
 print('\033[;1m' + '\033[1;42m' + '\033[1;97m')
 print()
 
-getchar = functions._Getch()  # daqui pra frente, quando chamar 'getchar' o programa faz o processo explicado acima
+getchar = functions.Getch()  # daqui pra frente, quando chamar 'getchar' o programa faz o processo explicado acima
 
 functions.clears()
 
