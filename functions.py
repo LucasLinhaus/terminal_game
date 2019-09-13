@@ -2,6 +2,12 @@
 import os
 import sys
 
+armas = {'arma':['ForçaBruta'], 'atk':[2]}
+CRS = 0
+ATQ = armas['atk'][0]
+DEF = 10
+HP = 30
+
 class Getch:
     """Similar ao getch do C++. Verifica o sistema e executa o comando"""
     def __init__(self):
@@ -61,6 +67,15 @@ def prinsubtitle(string):
     print(string)
     print('-'*len(string))
 
+def wait():
+    print('Pressione qualquer tecla...')
+    try:
+        getchar()
+        clears()
+    except OverflowError:
+        clears()
+
+
 def choice(options, functions):
     """
     :param options: Opções que o jogador deve escolher
@@ -113,7 +128,7 @@ def menu():
     :return: sem retorno; mostra o menu na tela
     """
     clears()
-    choice(['JOGAR', 'INSTRUÇÕES', 'CRÉDITOS', 'SAIR'], [play, finish, credit, finish])
+    choice(['JOGAR', 'INSTRUÇÕES', 'CRÉDITOS', 'SAIR'], [play, tutorial, credit, finish])
 
 def finish():
     """
@@ -140,8 +155,7 @@ def credit():
     print('\n\tFelipe Henriques\n\tMarco Aurélio\n')
     print()
     printitle('CEFET-RJ - 1°Ano Telecomunicações', 126)
-    print('\nPressione qualquer tecla para voltar...')
-    getchar()
+    wait()
     menu()
 
 
@@ -150,4 +164,85 @@ def play():
     :return: sem retorno; comeca o jogo
     """
     clears()
+    print('\t')
     print('\t\o/: Puxa vida! Terminei meu ensino fundamental e pretendo fazer um ensino médio integrado no CEFET... \nQue curso devo escolher?')
+    choice(['Telecomunicações', 'Tursimo'], [telecom, turismo])
+
+
+def mostra_atq():
+    clears()
+    print("\n\tÉ a sua força contra as adversidades do ensino médio. Você o usa para passar pelos desafios e derrotar inimigos\n")
+    wait()
+
+def mostra_def():
+    clears()
+    print("\n\tDegenerador Energético Funcional é o quanto você consegue absorver das 'pancadas' da vida e não se abalar por elas\n")
+    wait()
+
+def mostra_hp():
+    clears()
+    print("\n\tHabilidade Produtiva é a sua saúde, ele define o quanto as adversidades te afetam e se ele chegar a 0 você ficará triste\n")
+    wait()
+
+def mostra_crs():
+    clears()
+    print("\n\tCaRiSma é a sua persuasão, pois os professores não são monstros e se sensibilizam com a situação deplorável do aluno\n")
+    wait()
+
+def tutorial():
+    """
+    :return: sem retorno; mostra as instruções
+    """
+    clears()
+    print("\tOlá! Bem-vindo ao Path of High School")
+    wait()
+    print("\nEsse é você:  \o/\n")
+    print("\tVocê acabou de se formar no ensino fundamental e pretende fazer um ensino médio técnico no CEFET\n")
+    print("\tEsses são os seus status:\n	ATQ: {}, DEF: {}, HP: {}, CRS: {}".format(ATQ, DEF, HP, CRS))
+    print("\tSobre qual deles você gostaria de saber mais?")
+    choice(['ATQ', 'DEF', 'HP', 'CRS', 'Voltar'], [mostra_atq, mostra_def, mostra_hp, mostra_crs, tutorial_continua])
+
+def tutorial_continua():
+    print("\n\tEsse é um Desafio(Insira aqui um Dummy)")
+    print("\n\tDesafios são as adversidades do dia a dia e precisam ser superados.")
+    print("\n\te eles também possuem status")
+    wait()
+    print("\n			(Insira um dummy aqui)			")
+    print("\n ATQ: 1		DEF: 0			HP: 1		")
+    print("\n\n\tPara derrotá-los, você precisa de equipamento, quero dizer, conhecimento")
+    print("\n\tEsses são seus conhecimentos, ou melhor, os espaços para elas:\n")
+    print("\n\tA - 	C -\n\tB - 	D -\n\tE -Força Bruta")
+    print("\n\tPor enquanto você só tem a força bruta..\n")
+    print("\tAgora vamos começar o jogo...")
+    wait()
+    play()
+
+
+def turismo():
+    clears()
+    print('\tSeu espírito explorador e aventureiro o força a experimentar novas coisas')
+    wait()
+    print('\tDurante uma delas, assim como D. Sebastião, você some')
+    wait()
+    print('\tNinguem nunca mais ouviu falar sobre seu paradeiro...')
+    wait()
+    printitle('Fim de jogo!', 126)
+    wait()
+    menu()
+
+def telecom():
+    clears()
+    print('\tUm ser misterioso surge...')
+    print('\t°_°')
+    wait()
+    print('\t°_°: Bela escolha meu caro amigo! Eu sou Tim Berners-Lee, mas pode me chamar de TB')
+    wait()
+    print('\t°_°: Eu sou o criador da famosa rede WWW e te guiarei por este caminho')
+    wait()
+    print('\t°_°: Presentear-te-ei com um grande invento meu!')
+    wait()
+    print('\tVocê ganhou um novo conhecimento!')
+    print('\tJogador recebeu HTML!')
+    wait()
+    armas['arma'].append('HTML')
+    armas['atk'].append(1.5)
