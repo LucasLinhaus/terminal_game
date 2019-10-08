@@ -4,33 +4,53 @@
 
 using namespace std;
 
-int leitura(){      // ler valores do txt //
+int leitura(int var){      // recebe qual variavel deve ser lida //
+	int val;             // valor a ser retornado //
+	char txt[100];       // recebe as linhas do txt //
 	
+	FILE *arq;           // ponteiro pro txt //
+	arq=fopen("Player.txt", "rt");
+	
+	if(arq==NULL){        // verificar a leitura do arquivo //
+		cout<<"[ Falha ao executar comando ]\n";
+		return 0;
+	}
+	
+	for(int l=1;!feof(arq);l++){     // procura linha da variavel pedida // 
+		fgets(txt,100,arq);
+		if(l==var){
+			val=txt[5];
+		}
+	}
+	
+	fclose(arq);      // fecha txt e retorna o valor da variavel //
+	return val;
 }
 
-int escrita(){     // escrever novos valores no txt //
+int escrita(int var; int val){
 
 }
 
 int main(){
-	int equip, forca, crs;    // add = verificar outros inteiros //
+	int eqp, frc, crs;    // add = verificar outros inteiros //
 	
-	equip=leitura(1);      // ler valores do txt //
-	forca=leitura(2);
+	eqp=leitura(1);      // ler valores do txt //
+	frc=leitura(2);
 	crs=leitura(3);
 	
-	if(equip=0){      // Desarmado //
-		forca=0;
+	if(eqp=0){      // Desarmado //
+		frc=0;
 		crs=0;
-	}else if(equip=1){    // HTML //
-		forca=1;
+	}else if(eqp=1){    // HTML //
+		frc=1;
 		crs=0;
-	}else if(equip=2){    // C com cin e cout //
-		forca=5;
+	}else if(eqp=2){    // C com cin e cout //
+		frc=5;
 		crs=1;
 	}
 	
-	escrita(2; forca);
+	escrita(2; frc);   //  escreve valores no txt // 
 	escrita(3; crs);
 	
+	return;    // a definir //
 }
