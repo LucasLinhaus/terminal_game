@@ -1,23 +1,36 @@
 #include <iostream>
+#include <stdio.h>
+#include <conio.h>
 
 using namespace std;
 
-int leitura(){
+int leitura(){      // ler valores do txt //
 	
 }
 
-int player(){
-	char Name[10];
-	int equip, forca=0, crs=0, hp=30;    // add leitura do arquivo de texto pra inserir valor no int e nome do player //
-	equip=;                         // Ler do arq de texto o id do equipamento //
-	if(equip=0){
+int escrita(){     // escrever novos valores no txt //
+
+}
+
+int main(){
+	int equip, forca, crs;    // add = verificar outros inteiros //
+	
+	equip=leitura(1);      // ler valores do txt //
+	forca=leitura(2);
+	crs=leitura(3);
+	
+	if(equip=0){      // Desarmado //
 		forca=0;
 		crs=0;
-	}else if(equip=1){
-		forca=forca+[...];   // add valor e IFs de acordo com itens //
-		crs=crs+[...];
+	}else if(equip=1){    // HTML //
+		forca=1;
+		crs=0;
+	}else if(equip=2){    // C com cin e cout //
+		forca=5;
+		crs=1;
 	}
 	
-	// reescrever valores no arq de texto //
+	escrita(2; forca);
+	escrita(3; crs);
 	
 }
